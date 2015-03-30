@@ -1,30 +1,33 @@
 {
-  "name": "CITRITE Productivity for Citrix Users",
-  "version": "1.3",
-  "manifest_version": 2,
-  "minimum_chrome_version": "38",
-  "omnibox": { "keyword" : "citrite" },
-  "description": "CITRITE extension improves user experience on CITRIX intranet websites.",
-  "icons": {
+   "background": {
+      "scripts": [ "jquery.min.js", "background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "icon32.png",
+      "default_popup": "popup.html"
+   },
+   "content_scripts": [ {
+      "css": [ "style.css" ],
+      "include_globs": [ "*://*citrix.com*", "*://*citrite.net*", "*://*xensource.com*", "*://*xenserver.org*", "*://*podio.com/*", "*://*.trello.com*", "*://*.atlassian.com*", "*://citrix.hire.com*" ],
+      "js": [ "jquery.min.js", "jquery.ba-replacetext.js", "clickable_links.js" ],
+      "matches": [ "\u003Call_urls>" ]
+   } ],
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+   "description": "CITRITE extension improves user experience on CITRIX intranet websites.",
+   "icons": {
       "128": "icon128.png",
       "16": "icon16.png",
       "32": "icon32.png",
       "48": "icon48.png"
-  },
-  "browser_action": {
-    "default_icon": "icon32.png",
-    "default_popup": "popup.html"
-  },
- "background": {
-    "scripts": ["background.js"]
-  },
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
-  "permissions": [ "tabs", "background" ],
-   "content_scripts": [ {
-      "css": [ "style.css" ],
-      "include_globs": [ "*://*citrix.com*", "*://*citrite.net*", "*://*xensource.com*", "*://*xenserver.org*", "*://*podio.com/*", "*://*.trello.com*", "*://*.atlassian.com*", "*://citrix.hire.com*" ],
-      "js": [ "jquery.min.js", "jquery.ba-replacetext.js", "clickable_links.js"],
-      "matches": [ "\u003Call_urls\u003E" ]
-   } ]
-
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8oO1UsX23OfFvZTWSt1SNqjd3EuOKPbdNU9BZLs1DpyE6ANc6/IczjJZMyZVo2ifHYDoG+S2Zw7VYACeLbV80Y2DMnRYkfN7BWHnp2ajF8Z6Zc7Wfg+oHGrsXOEPNA9UnDiWLSVBBSEjQLWp25Qw2F9+25NT84Q0U6RH9Tr25mQIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "38",
+   "name": "Citrix Intranet",
+   "omnibox": {
+      "keyword": "c"
+   },
+   "permissions": [ "notifications", "tabs", "storage", "background", "http://*/*", "https://*/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.7.1"
 }
