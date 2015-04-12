@@ -1,3 +1,33 @@
+/*
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+        chrome.declarativeContent.onPageChanged.addRules([{
+            conditions: [
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'citrite.net'}
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'citrix.com'}
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'podio.com'}
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'slack.com'}
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'xenserver.org'}
+                }),
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: 'xensource.com'}
+                }),
+            ],
+            actions: [new chrome.declarativeContent.ShowPageAction()]
+        }]);
+    });
+});
+*/
+//console.log("bla bla");
 
 function navigate(url) {
   chrome.tabs.getSelected(null, function(tab) {
@@ -7,11 +37,12 @@ function navigate(url) {
 
 function show_notification(message) {
     var notification = new Notification(message, { icon: 'icon48.png', tag: 'citrix' });
-    notification.onshow = function() { setTimeout(notification.close, 6000); }
+    notification.onshow = function() { setTimeout(notification.close, 3000); }
 }
 
 
 // Check whether new version is installed
+/*
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
         show_notification("Thanks for installing our Citrix extension! #DevOps");
@@ -22,27 +53,24 @@ chrome.runtime.onInstalled.addListener(function(details){
         }
     }
 });
-
+*/
 //show_notification("xxx");
 //chrome.runtime.onInstalled.addListener(function(details) { if (details.reason == "update") { chrome.windows.create({url: "popup.html", type: "popup"}); } });
 
+
+
+function patchPage(tabId, changeInfo, tab) {
+
+   clickable_links();
+   chrome.pageAction.show(tabId);
+
+}
+
+//chrome.tabs.onUpdated.addListener(patchPage);
+
+
+
 /*
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    if(changeInfo.status == "loading") {
-
-        if(/google\.(com|co\.uk).+search\?q.(CF|CA|CP|CR|JC|EA|EXT|PR|PGM|SOM|TC|TR|WP|XRT|IT|XOP)\-\d+/.test(tab.url)) {
-            var ticket =  /\w+\-\d+/.exec(tab.url);
-            navigate("https://jira.uk.xensource.com/QuickSearch.jspa?searchString=" + ticket[0]);
-        }
-        else if(/google\.(com|co\.uk).+search\?q.(ACER|AFRL|AMD|AMZ|AT|AVTM|BCH|BET|BIT|BR|BRO|CANL|CAR|CC|CER|CHE|CIS|CRD|CSC|CXD|CYB|DELL|DOC|EGEN|EMC|EMX|ER|FE|FUJ|GEMT|HCL|HDX|HFX|HIDG|HIT|HP|HUA|IBM|INTC|INTX|ISV|JAXC|LSI|LSIN|MAR|MLX|MS|
-MTHA|MTIT|NCSC|NEC|NETAPP|NIC|NICS|NTGR|NVHP|NVIDIA|NXS|ORCL|OSX|PC|QL|RAX|SCTX|SCTXI|SF|SLS|SRVT|SS|STAR|STRA|SYN|TESCO|TST|UGIS|VRTA|XCAMD|XCEHP|XCEN|XCHP|XCSUP|XCT|XCWGP|XDELL|XHP|XSB|XWS|ZLIT|ZZ)\-\d+/.test(tab.url)) {
-            var ticket =  /\w+\-\d+/.exec(tab.url);
-            navigate("https://tracker.vmd.citrix.com/QuickSearch.jspa?searchString=" + ticket[0]);
-        }
-    }
-});
-*/
-
 chrome.omnibox.onInputChanged.addListener(
     function(text, suggest) 
     {
@@ -77,3 +105,4 @@ chrome.omnibox.onInputEntered.addListener(
         navigate(url);
   }
 );
+*/

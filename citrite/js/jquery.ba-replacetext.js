@@ -32,7 +32,7 @@
           if ( node.nodeType === 3 ) {
             
             // The original node value.
-            val = node.value;
+            val = node.nodeValue;
             
             // The new value.
             if (typeof val !== "undefined" && typeof val.replace !== "undefined") {
@@ -52,7 +52,7 @@
               } else {
                 // The new value contains no HTML, so it can be set in this
                 // very fast, simple way.
-                node.value = new_val;
+                node.nodeValue = new_val;
               }
             }
             }

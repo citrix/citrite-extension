@@ -3,11 +3,14 @@ set -e
 
 zip citrite.zip citrite/*
 
-#wget -q --timestamp https://raw.githubusercontent.com/jonnor/chrome-webstore-deploy/master/bin/chrome-web-store.py
+wget -q --timestamp https://raw.githubusercontent.com/jonnor/chrome-webstore-deploy/master/bin/chrome-web-store.py
 
 # download the secrets.json file from Google API
 
 export WEBSTORE_OAUTH2_FILE=oauth2.dat
 export WEBSTORE_SECRETS_FILE=secrets.json
+
+export FILE_NAME=citrite.zip
+export APP_ID=hjacpdaecmilhndcbllidcgaaicdlpff
 
 python chrome-web-store.py $APP_ID --upload=$FILE_NAME --publish=public
