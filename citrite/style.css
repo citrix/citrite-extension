@@ -1,9 +1,17 @@
 .linkclass { }
 
 /* that's for coloring the visited links differently */
+a {
+    text-decoration: none;
+    //text-shadow: 0px 0px 3px white !important;
+
+}
+
 a:visited {
     color: purple !important;
-    text-decoration: none;
     /*text-shadow: 0 0 0.2em #FFF;*/
-    text-shadow: 2px 2px 3px red !important;
+}
+
+a:hover {
+    text-decoration: underline;
 }

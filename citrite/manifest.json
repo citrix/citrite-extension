@@ -1,11 +1,15 @@
 {
    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+   "background": {
+      "persistent": true,
+      "scripts": ["js/jquery.min.js", "js/jquery.linkify.min.js", "js/jquery.ba-replacetext.js", "js/background.js"]
+    },
    "content_scripts": [ {
       "css": [ "style.css" ],
-      "include_globs": [ "*://*citrix.com*", "*://*citrite.net*", "*://*xensource.com*", "*://*xenserver.org*", "*://*podio.com/*", "*://*.trello.com*", "*://*.atlassian.com*", "*://citrix.hire.com*" ],
-      "js": [ "js/jquery.min.js", "js/jquery.linkify.min.js", "js/jquery.ba-replacetext.js", "js/replace.js" ],
+      "js": [ "js/jquery.min.js", "js/jquery.linkify.min.js", "js/jquery.ba-replacetext.js", "js/content.js" ],
       "run_at": "document_end",
-     "matches": [ "\u003Call_urls>" ]
+      "matches": ["*://*.citrix.com/*","*://*.citrite.net/*", "*://*.xensource.com/*", 
+"*://*.xenserver.org/*", "*://*.podio.com/*", "*://*.trello.com/*", "*://*.atlassian.com/*", "*://citrix.hire.com/*", "*://citrix.slack.com/*"]
    } ],
    "description": "CITRITE extension improves user experience on CITRIX intranet websites.",
    "icons": {
@@ -28,7 +32,8 @@
    "omnibox": {
       "keyword": "c"
    },
-   "permissions": [ "declarativeContent", "webRequest", "webNavigation", "activeTab", "notifications", "tabs", "storage", "background", "http://*/*", "https://*/*" ],
+   "permissions": [ "tabs", "declarativeContent", "webRequest", "webNavigation", "activeTab", "notifications", "storage", "background", "http://*/*", "https://*/*" ],
+   "web_accessible_resources": ["img/*.png","js/*.js"],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.9.0"
+   "version": "2.0.0"
 }

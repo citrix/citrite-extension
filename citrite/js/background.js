@@ -33,16 +33,14 @@ function navigate(url) {
   chrome.tabs.getSelected(null, function(tab) {
     chrome.tabs.update(tab.id, {url: url});
   });
-};
+}
 
 function show_notification(message) {
     var notification = new Notification(message, { icon: 'icon48.png', tag: 'citrix' });
     notification.onshow = function() { setTimeout(notification.close, 3000); }
 }
 
-
 // Check whether new version is installed
-/*
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
         show_notification("Thanks for installing our Citrix extension! #DevOps");
@@ -53,21 +51,39 @@ chrome.runtime.onInstalled.addListener(function(details){
         }
     }
 });
-*/
-//show_notification("xxx");
-//chrome.runtime.onInstalled.addListener(function(details) { if (details.reason == "update") { chrome.windows.create({url: "popup.html", type: "popup"}); } });
 
 
+jQuery.getJSON("https://do.citrite.net/extension.json?", function(data) {
+    var replacements = data;
 
-function patchPage(tabId, changeInfo, tab) {
+    console.log("Loaded JSON config from DevOps server.");
 
-   clickable_links();
-   chrome.pageAction.show(tabId);
+    chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+        if (request && request.type === 'showPageAction') {
+            //console.log("XXXX " + replacements);
+            var tab = sender.tab;
 
-}
+            function callback(tab) {
+                if (chrome.runtime.lastError) {
+                    //console.log(chrome.runtime.lastError.message);
+                } else {
+                    console.log("citrite activate! " + data);
+                    chrome.pageAction.show(tab.id);
+                    chrome.pageAction.setTitle({
+                        tabId: tab.id,
+                        title: 'url=' + tab.url
+                    });
+                    var mycode = "console.log('xxx'); var data = " + JSON.stringify(data) + "; clickable_links(data);"; // var x = JSON.parse(data)
+                    chrome.tabs.executeScript(tab.id, {code: mycode});
+                    console.log("zuzu");
+                }
+            }
+            chrome.tabs.get(tab.id, callback);
 
-//chrome.tabs.onUpdated.addListener(patchPage);
+        }
+    });
 
+});
 
 
 /*
@@ -106,3 +122,5 @@ chrome.omnibox.onInputEntered.addListener(
   }
 );
 */
+
+
