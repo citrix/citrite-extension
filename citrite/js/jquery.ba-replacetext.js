@@ -1,15 +1,86 @@
 /*!
- * jQuery replaceText - v1.1 - 11/21/2009
- * http://benalman.com/projects/jquery-replacetext-plugin/
- * 
+ * jQuery replaceText - v1.2 - 2014-05-07
+ * https://github.com/jsContribs/jquery-replacetext
+ *
+ * Copyright (c) 2014 Sorin Sbarnea for JsContribs
+ * Copyright (c) 2012 "Cowboy" Laurent Van Winckel for Clickable Links
  * Copyright (c) 2009 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
- *
- * Adapted by Laurent Van Winckel for Clickable Links, anno 2012.
+ * http://benalman.com/projects/jquery-replacetext-plugin/
  */
+
+// Script: jQuery replaceText: String replace for your jQueries!
+//
+// *Version: 1.1, Last updated: 11/21/2009*
+// 
+// Project Home - http://benalman.com/projects/jquery-replacetext-plugin/
+// GitHub       - http://github.com/cowboy/jquery-replacetext/
+// Source       - http://github.com/cowboy/jquery-replacetext/raw/master/jquery.ba-replacetext.js
+// (Minified)   - http://github.com/cowboy/jquery-replacetext/raw/master/jquery.ba-replacetext.min.js (0.5kb)
+// 
+// About: License
+// 
+// Copyright (c) 2009 "Cowboy" Ben Alman,
+// Dual licensed under the MIT and GPL licenses.
+// http://benalman.com/about/license/
+// 
+// About: Examples
+// 
+// This working example, complete with fully commented code, illustrates one way
+// in which this plugin can be used.
+// 
+// replaceText - http://benalman.com/code/projects/jquery-replacetext/examples/replacetext/
+// 
+// About: Support and Testing
+// 
+// Information about what version or versions of jQuery this plugin has been
+// tested with, and what browsers it has been tested in.
+// 
+// jQuery Versions - 1.3.2, 1.4.1
+// Browsers Tested - Internet Explorer 6-8, Firefox 2-3.6, Safari 3-4, Chrome, Opera 9.6-10.1.
+// 
+// About: Release History
+//
+// 1.2 - (2014-05-07) jQuery 2.2.3 
+// 1.1 - (2009-11-21) Simplified the code and API substantially.
+// 1.0 - (2009-11-21) Initial release
+
+jQuery.noConflict();
+
 (function($){
   '$:nomunge'; // Used by YUI compressor.
+  
+  // Method: jQuery.fn.replaceText
+  // 
+  // Replace text in specified elements. Note that only text content will be
+  // modified, leaving all tags and attributes untouched. The new text can be
+  // either text or HTML.
+  // 
+  // Uses the String prototype replace method, full documentation on that method
+  // can be found here: 
+  // 
+  // https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Objects/String/Replace
+  // 
+  // Usage:
+  // 
+  // > jQuery('selector').replaceText( search, replace [, text_only ] );
+  // 
+  // Arguments:
+  // 
+  //  search - (RegExp|String) A RegExp object or substring to be replaced.
+  //    Because the String prototype replace method is used internally, this
+  //    argument should be specified accordingly.
+  //  replace - (String|Function) The String that replaces the substring received
+  //    from the search argument, or a function to be invoked to create the new
+  //    substring. Because the String prototype replace method is used internally,
+  //    this argument should be specified accordingly.
+  //  text_only - (Boolean) If true, any HTML will be rendered as text. Defaults
+  //    to false.
+  // 
+  // Returns:
+  // 
+  //  (jQuery) The initial jQuery collection of elements.
   
   $.fn.replaceText = function( search, replace, text_only ) {
     return this.each(function(){
@@ -21,13 +92,23 @@
         remove = [];
       
       // Laurent: exclude some tags
-      var exTags=['a', 'head', 'noscript', 'option', 'script', 'style', 'title', 'textarea', 'pre', 'xmp', 'input'];
+      var exTags=['a', 'head', 'noscript', 'option', 'script', 'style', 'title', 'textarea', 'pre', 'xmp', 'input', 'time'];
+      //var inTags=['html', 'p', 'div', 'span', 'b', 'strong', 'i', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul' ,'li', 'ol', 'form', 'button', 'footer'];
+      var inTags=[]; //, 'strong', 'i', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul' ,'li', 'ol', 'form', 'button', 'footer'];
       
       if ( node && $.inArray(this.nodeName.toLowerCase(), exTags) == -1 ) { // Laurent: exclude some tags
-        
+        if ( $.inArray(this.nodeName.toLowerCase(), inTags) != -1) {
+            //console.log(this.nodeName.toLowerCase());
+            
+        }
+        else {
         // Loop over all childNodes.
         do {
           
+           //if ( $.inArray(this.nodeName.toLowerCase(), inTags) != -1) {
+           //return;
+           //}
+
           // Only process text nodes.
           if ( node.nodeType === 3 ) {
             
@@ -58,7 +139,8 @@
             }
           }
           
-        } while ( node = node.nextSibling );
+        } while ( node = node.nextSibling ); 
+        }
       }
       
       // Time to remove those elements!

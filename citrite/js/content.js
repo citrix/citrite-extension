@@ -19,10 +19,10 @@ function clickable_links(replacements) {
     for (var key in replacements) {
         //console.log("replace: ", key);
 
-        var re = new RegExp(key,"gmi");
+        var re = new RegExp(key,"gm");
 
-        jQuery('body *').replaceText(re, replacements[key]);
+        jQuery('body *').replaceText(re, replacements[key], false);
     }
-    //$('body *').linkify();
+    jQuery('body *').linkify();
 
 }

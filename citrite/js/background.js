@@ -73,9 +73,9 @@ jQuery.getJSON("https://do.citrite.net/extension.json?", function(data) {
                         tabId: tab.id,
                         title: 'url=' + tab.url
                     });
-                    var mycode = "console.log('xxx'); var data = " + JSON.stringify(data) + "; clickable_links(data);"; // var x = JSON.parse(data)
+                    var mycode = "var data = " + JSON.stringify(data) + "; clickable_links(data);"; // var x = JSON.parse(data)
                     chrome.tabs.executeScript(tab.id, {code: mycode});
-                    console.log("zuzu");
+                    //console.log("zuzu");
                 }
             }
             chrome.tabs.get(tab.id, callback);

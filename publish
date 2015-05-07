@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-zip citrite.zip citrite/*
+zip -r citrite.zip citrite/*
 
 wget -q --timestamp https://raw.githubusercontent.com/jonnor/chrome-webstore-deploy/master/bin/chrome-web-store.py
 

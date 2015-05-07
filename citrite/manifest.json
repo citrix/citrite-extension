@@ -8,7 +8,7 @@
       "css": [ "style.css" ],
       "js": [ "js/jquery.min.js", "js/jquery.linkify.min.js", "js/jquery.ba-replacetext.js", "js/content.js" ],
       "run_at": "document_end",
-      "matches": ["*://*.citrix.com/*","*://*.citrite.net/*", "*://*.xensource.com/*", 
+      "matches": ["*://*.citrix.com/*","*://*.citrite.net/*", "*://*.xensource.com/*", "*://*.ops.expertcity.com/*", "*://*.expertcity.com/*",
 "*://*.xenserver.org/*", "*://*.podio.com/*", "*://*.trello.com/*", "*://*.atlassian.com/*", "*://citrix.hire.com/*", "*://citrix.slack.com/*"]
    } ],
    "description": "CITRITE extension improves user experience on CITRIX intranet websites.",
@@ -29,11 +29,12 @@
    "manifest_version": 2,
    "minimum_chrome_version": "38",
    "name": "Citrix Intranet",
+   "short_name": "Citrix",
    "omnibox": {
       "keyword": "c"
    },
    "permissions": [ "tabs", "declarativeContent", "webRequest", "webNavigation", "activeTab", "notifications", "storage", "background", "http://*/*", "https://*/*" ],
    "web_accessible_resources": ["img/*.png","js/*.js"],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.0.0"
+   "version": "2.0.2"
 }
